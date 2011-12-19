@@ -30,6 +30,119 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 # Your goal is to write the score method.
 
 def score(dice)
+  # TODO: need to create a scoring function that dispatches on the argument
+  sum=0
+  ones=[]
+  twos=[]
+  threes=[]
+  fours=[]
+  fives=[]
+  sixes=[]
+
+  def sizeIs3?(y,sum)
+    begin
+      if y == 1
+        begin
+          sum = sum + 1000 - 200
+          ones = []
+          sum
+        end
+      elsif y== 5
+        begin
+          sum += (y*100) - 100
+          fives = []
+          sum
+        end
+      else
+        begin
+          sum += (y*100)
+          if y == 2
+            twos = []
+          elsif y== 3
+            threes = []
+          elsif y== 4
+            fours = []
+          elsif y== 6
+            sixes = []
+          end
+          sum
+        end
+      end
+    end
+  end
+  if dice == []
+    return sum
+  end
+  dice.each {|x|
+    if x == 1
+      begin
+        ones.push(x)
+        if ones.size == 3
+          begin
+            sum = sizeIs3?(x,sum)
+          end
+        else
+          sum += 100
+        end
+      end
+    elsif x == 5
+      begin
+        fives.push(x)
+        if fives.size == 3
+          begin
+            sum = sizeIs3?(x,sum)
+          end
+        else
+        sum += 50
+      end
+      end
+    elsif x == nil
+      begin
+        return sum
+      end
+    else
+      begin
+        if x == 2
+          begin
+            twos.push(x)
+            if twos.size == 3
+              begin
+                sum = sizeIs3?(x,sum)
+              end
+            end
+          end
+        elsif x == 3
+          begin
+            threes.push(x)
+            if threes.size == 3
+              begin
+                sum = sizeIs3?(x,sum)
+              end
+            end
+          end
+        elsif x == 4
+          begin
+            fours.push(x)
+            if fours.size == 3
+              begin
+                sum = sizeIs3?(x,sum)
+              end
+            end
+          end
+        elsif x == 6
+          begin
+            sixes.push(x)
+            if sixes.size == 3
+              begin
+                sum = sizeIs3?(x,sum)
+              end
+            end
+          end
+        end
+      end
+    end
+  }
+  sum
   # You need to write this method
 end
 
